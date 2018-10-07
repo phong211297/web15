@@ -1,55 +1,87 @@
 const fs = require('fs');
 const http = require('http');
-const objData = {
-    name : 'huy',
-    age : 18
-};
-const objData1 = ['phng' , 'pham ', 'aca'];
-// objData.push({
-//     name : 'phong',
-//     age : 19
-// });
-objData1.push("man");
-console.log(objData1.length);
+const express = require('express');
+const path = require('path');
+const axios = require("axios");
+
 const server = http.createServer();
 
-server.listen(3000);
+var app = express();
 
-// console.log("Start write file");
-// const fileWriterSync = fs.writeFileSync('test.txt', "dit con chi m",(err) =>{
-//     if(err) console.log(err)
-//     else console.log("write file success!");
-// });
+app.use(express.static('../btvn4'));
 
- console.log("Start write file");
- fs.writeFile('test.txt', JSON.stringify(objData), (err) =>{
-  if(err) console.log(err)
-   else console.log("write file success!");
+app.get('/',(req,res) => {
+      console.log(__dirname);
+      res.sendFile(path.resolve(__dirname,'/index.html'));
+
+})
+app.get("/web10.json",function(req, res){
+    axios.get("https://btvn-web15s.herokuapp.com/api/web10")
+    .then(res => {
+        fs.writeFileSync("../web10.json",JSON.stringify(res.data), (err) => {
+            console.log(err);
+        });
+    })
+    .catch(err => {console.log(err)});
+    res.sendFile(__dirname + "/web10.json");
+})
+
+app.get("/web11.json",function(req, res){
+    axios.get("https://btvn-web15s.herokuapp.com/api/web11")
+    .then(res => {
+        fs.writeFileSync("../web11.json",JSON.stringify(res.data), (err) =>{
+            console.log(err);
+        });
+    })
+    .catch(err => {console.log(err)});
+    res.sendFile(__dirname + "/web11.json");
+})
+
+app.get("/web12.json",function(req, res){
+    axios.get("https://btvn-web15s.herokuapp.com/api/web12")
+    .then(res => {
+        fs.writeFileSync("../web12.json",JSON.stringify(res.data), (err) =>{
+            console.log(err);
+        });
+    })
+    .catch(err => {console.log(err)});
+    res.sendFile(__dirname + "/web12.json");
+})
+
+app.get("/web13.json",function(req, res){
+    axios.get("https://btvn-web15s.herokuapp.com/api/web13")
+    .then(res => {
+        fs.writeFileSync("../web13.json",JSON.stringify(res.data), (err) =>{
+            console.log(err);
+        });
+    })
+    .catch(err => {console.log(err)});
+    res.sendFile(__dirname + "/web13.json");
+})
+app.get("/web14.json",function(req, res){
+    axios.get("https://btvn-web15s.herokuapp.com/api/web14")
+    .then(res => {
+        fs.writeFileSync("../web14.json",JSON.stringify(res.data), (err) =>{
+            console.log(err);
+        });
+    })
+    .catch(err => {console.log(err)});
+    res.sendFile(__dirname + "/web14.json");
+})
+
+app.get("/web15.json",function(req, res){
+    axios.get("https://btvn-web15s.herokuapp.com/api/web15")
+    .then(res => {
+        fs.writeFileSync("../web15.json",JSON.stringify(res.data), (err) =>{
+            console.log(err);
+        });
+    })
+    .catch(err => {console.log(err)});
+    res.sendFile(__dirname + "/web15.json");
+})
+
+app.listen(3000,(err) => {
+    if(err) console.log(err);
+    else console.log("Server is listening at port 3000!");
+    
 });
-
-// console.log("Start read file");
-// const fileDataSync = fs.readFileSync('test.txt', {encoding : 'utf-8'});
-// console.log("Data : " + fileDataSync);
-
-// console.log("Start read file");
-// const fileDataSync = fs.readFileSync('test.txt',{encoding : 'utf-8'});
-// //const dataObj = JSON.parse(fileDataSync);
-// console.log("read file success! Data :" + fileDataSync);
-
-// // fs.writeFileSync
-
-// console.log("End write file");
-
-// console.log("Start read file");
-// const  fileData = fs.readFile('test.txt', (err) =>{
-//    if(err) console.log(err)
-//    else console.log("read file success! Data :" + data);
-// });
-
-// fs.writeFileSync
-
-// console.log("Start read file sync");
-// const fileDataSync = fs.readFileSync('test.txt',{encoding : 'utf-8'});
-// dataObj = JSON.parse(fileDataSync);
-// console.log(dataObj.name +dataObj.age);
-// console.log("End read file sync");
